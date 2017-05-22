@@ -17,5 +17,5 @@ docker_exit_code=`expr $?`
 if [[ $docker_exit_code != 0 ]]; then
   echo
   echo "[ERROR] Tests failed!"
-  exit $?
+  exit $docker_exit_code
 fi
