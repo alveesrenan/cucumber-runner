@@ -1,13 +1,9 @@
-FROM ruby:2.3.1-alpine
+FROM ruby:2.3.1
 
 USER root
 
 # adduser
-RUN adduser -D -s /bin/bash -h /cucumber cucumber
-
-RUN apk add --update wget g++ gcc make bash && \
-    apk add openssl ca-certificates && \
-    update-ca-certificates
+RUN useradd -ms /bin/bash -d /cucumber/ cucumber
 
 WORKDIR /opt
 
