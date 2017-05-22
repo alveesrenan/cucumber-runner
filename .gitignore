@@ -1,0 +1,3 @@
+test/*_history
+test/.*
+.history/

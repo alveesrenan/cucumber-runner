@@ -1,0 +1,112 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    addressable (2.5.1)
+      public_suffix (~> 2.0, >= 2.0.2)
+    builder (3.2.3)
+    byebug (9.0.6)
+    capybara (2.14.0)
+      addressable
+      mime-types (>= 1.16)
+      nokogiri (>= 1.3.3)
+      rack (>= 1.0.0)
+      rack-test (>= 0.5.4)
+      xpath (~> 2.0)
+    cliver (0.3.2)
+    cucumber (2.4.0)
+      builder (>= 2.1.2)
+      cucumber-core (~> 1.5.0)
+      cucumber-wire (~> 0.0.1)
+      diff-lcs (>= 1.1.3)
+      gherkin (~> 4.0)
+      multi_json (>= 1.7.5, < 2.0)
+      multi_test (>= 0.1.2)
+    cucumber-api (0.4)
+      cucumber (~> 2.0)
+      json-schema (~> 2.5)
+      jsonpath (~> 0.5)
+      rest-client (~> 1.8)
+    cucumber-core (1.5.0)
+      gherkin (~> 4.0)
+    cucumber-wire (0.0.1)
+    diff-lcs (1.3)
+    domain_name (0.5.20170404)
+      unf (>= 0.0.5, < 1.0.0)
+    gherkin (4.1.3)
+    http-cookie (1.0.3)
+      domain_name (~> 0.5)
+    httparty (0.15.5)
+      multi_xml (>= 0.5.2)
+    httparty-cookies (0.1.1)
+      http-cookie
+      httparty
+    json-schema (2.8.0)
+      addressable (>= 2.4)
+    jsonpath (0.7.2)
+      multi_json
+    mime-types (2.99.3)
+    mini_portile2 (2.1.0)
+    multi_json (1.12.1)
+    multi_test (0.1.2)
+    multi_xml (0.6.0)
+    net-sftp (2.1.2)
+      net-ssh (>= 2.6.5)
+    net-ssh (4.1.0)
+    netrc (0.11.0)
+    nokogiri (1.7.2)
+      mini_portile2 (~> 2.1.0)
+    phantomjs (2.1.1.0)
+    poltergeist (1.15.0)
+      capybara (~> 2.1)
+      cliver (~> 0.3.1)
+      websocket-driver (>= 0.2.0)
+    public_suffix (2.0.5)
+    rack (2.0.3)
+    rack-test (0.6.3)
+      rack (>= 1.0)
+    rake (12.0.0)
+    rest-client (1.8.0)
+      http-cookie (>= 1.0.2, < 2.0)
+      mime-types (>= 1.16, < 3.0)
+      netrc (~> 0.7)
+    rspec (3.6.0)
+      rspec-core (~> 3.6.0)
+      rspec-expectations (~> 3.6.0)
+      rspec-mocks (~> 3.6.0)
+    rspec-core (3.6.0)
+      rspec-support (~> 3.6.0)
+    rspec-expectations (3.6.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.6.0)
+    rspec-mocks (3.6.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.6.0)
+    rspec-support (3.6.0)
+    unf (0.1.4)
+      unf_ext
+    unf_ext (0.0.7.4)
+    websocket-driver (0.6.5)
+      websocket-extensions (>= 0.1.0)
+    websocket-extensions (0.1.2)
+    xpath (2.0.0)
+      nokogiri (~> 1.3)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  byebug
+  capybara
+  cucumber
+  cucumber-api
+  httparty
+  httparty-cookies
+  net-sftp
+  phantomjs
+  poltergeist
+  rack-test
+  rake
+  rspec
+
+BUNDLED WITH
+   1.15.0
