@@ -22,3 +22,24 @@ sudo service docker restart
 ```sh
 docker login http://10.13.1.15:5000/
 ```
+
+# Running your gherkins
+
+**Steps:**
+1. Map your cucumber project into /cucumber folder (volume)
+2. Run container, examples below
+
+**Docker command line example:**
+
+```sh
+docker run -v `pwd`/test:/cucumber/ -i -t --name my-cucumber-container 10.13.1.15:5000/cucumber
+```
+
+**Docker compose example:**
+```yaml
+cucumber:
+    image: 10.13.1.15:5000/cucumber
+    container_name: my-cucumber-container
+    volumes:
+        - ./test:/cucumber
+```

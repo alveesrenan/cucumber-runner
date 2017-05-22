@@ -12,7 +12,6 @@ else
 fi
 
 docker run -v $volume -i -t -e lock=false --name $container_name $image_name
-
 docker_exit_code=`expr $?`
 
 if [[ $docker_exit_code != 0 ]]; then

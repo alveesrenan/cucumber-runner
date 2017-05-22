@@ -1,3 +1,5 @@
 test/*_history
 test/.*
+test/Gemfile.lock
+test/features/screenshots/
 .history/
