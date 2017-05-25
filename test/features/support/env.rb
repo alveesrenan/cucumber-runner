@@ -1,10 +1,9 @@
 require 'rubygems'
-require 'capybara/cucumber'
 require 'phantomjs'
+require 'capybara/cucumber'
 require 'capybara/poltergeist'
 require 'capybara/rspec'
 require 'httparty'
-require 'net/sftp'
 require 'byebug'
 
 Capybara.configure do |config|

@@ -2,7 +2,7 @@ Given(/^I am on the homepage "([^"]*)"$/) do |url|
   visit url
 end
 
-When(/^I see the title "([^"]*)"$/) do |title|
+Then(/^I should see the title "([^"]*)"$/) do |title|
   page.should have_css('title', :text => title)
 end
 
