@@ -1,15 +1,15 @@
 #!/bin/sh
-./build.sh
+sh build.sh
 if [ $? != 0 ]; then
   exit $?
 fi
 
-./test.sh
+sh test.sh
 if [ $? != 0 ]; then
   exit $?
 fi
 
-./push.sh
+sh push.sh
 if [ $? != 0 ]; then
   exit $?
 fi
