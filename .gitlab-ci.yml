@@ -14,7 +14,8 @@ test:
   image: registry.atech.com.br/cucumber
   stage: test
   before_script:
+    - cd test/
     - gem install bundler
     - bundle install
   script:
-    cucumber test/
+    cucumber
