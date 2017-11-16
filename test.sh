@@ -2,7 +2,6 @@
 registry=registry.atech.com.br
 image=cucumber
 tag=${registry}/${image}
-exit 1
 
 volume=`pwd`/test:/cucumber/
 container=cucumber-test
