@@ -1,12 +1,20 @@
 stages:
-  - pipeline
+  - registry
+  - test
 
-build-test-push:
+build-push:
   image: docker:latest
-  stage: pipeline
+  stage: registry
   services:
     - docker:dind
-  before_script:
-    - chmod 777 -R test
   script:
-    - sh pipe.sh
+    - sh registry.sh
+
+test:
+  image: registry.atech.com.br/cucumber
+  stage: test
+  before_script:
+    - gem install bundler
+    - bundle install
+  script:
+    cucumber test/

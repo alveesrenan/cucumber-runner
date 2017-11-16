@@ -7,14 +7,6 @@ if [ $? != 0 ]; then
   exit 1
 fi
 
-sh test.sh
-if [ $? != 0 ]; then
-  echo '####################'
-  echo 'Error to test image'
-  echo '####################'
-  exit 1
-fi
-
 sh push.sh
 if [ $? != 0 ]; then
   echo '####################'
