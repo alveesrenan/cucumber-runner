@@ -1,9 +1,9 @@
 stages:
   - pipeline
 
-atech-registry:
+build-test-push:
   image: docker:latest
-  stage: deploy-docker
+  stage: pipeline
   services:
     - docker:dind
   script:
