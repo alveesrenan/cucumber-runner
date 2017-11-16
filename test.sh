@@ -21,6 +21,10 @@ echo '##################################'
 docker run -v ${volume} -e lock=false --name ${container} ${tag}
 docker_exit_code=`expr $?`
 
+echo '@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@'
+echo $docker_exit_code
+echo '@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@'
+
 if [[ ${docker_exit_code} != 0 ]]; then
   echo
   echo "[ERROR] Tests failed!"
