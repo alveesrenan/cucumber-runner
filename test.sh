@@ -14,7 +14,7 @@ else
     echo 'Do not exclude container because there is no'
 fi
 
-docker run -v ${volume} -it -e lock=false --name ${container} ${tag}
+docker run -v ${volume} -v /var/run/docker.sock:/var/run/docker.sock -i -t -e lock=false --name ${container} ${tag}
 docker_exit_code=`expr $?`
 
 if [[ ${docker_exit_code} != 0 ]]; then
