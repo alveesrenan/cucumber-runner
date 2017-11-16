@@ -7,4 +7,6 @@ build-test-push:
   services:
     - docker:dind
   script:
-    - sh pipe.sh
+    - sh build.sh
+    - sh test.sh
+    - sh push.sh
