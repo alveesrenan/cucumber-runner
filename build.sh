@@ -1,8 +1,11 @@
-#!/bin/bash
-image_name=cucumber
-docker build -t $image_name .
+#!/bin/sh
+registry=registry.atech.com.br
+image=cucumber
+tag=${registry}/${image}
 
-if [[ $? != 0 ]]; then
+docker build -t $tag .
+
+if [ $? != 0 ]; then
   echo
   echo "[ERROR] Image was not builded!"
   exit $?

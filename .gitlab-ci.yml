@@ -1,0 +1,10 @@
+stages:
+  - pipeline
+
+atech-registry:
+  image: docker:latest
+  stage: deploy-docker
+  services:
+    - docker:dind
+  script:
+    - sh pipe.sh
