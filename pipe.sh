@@ -4,7 +4,7 @@ if [ $? != 0 ]; then
   echo '####################'
   echo 'Error to build image'
   echo '####################'
-  exit $?
+  exit 1
 fi
 
 sh test.sh
@@ -12,7 +12,7 @@ if [ $? != 0 ]; then
   echo '####################'
   echo 'Error to test image'
   echo '####################'
-  exit $?
+  exit 1
 fi
 
 sh push.sh
@@ -20,5 +20,5 @@ if [ $? != 0 ]; then
   echo '####################'
   echo 'Error to push image'
   echo '####################'
-  exit $?
+  exit 1
 fi
