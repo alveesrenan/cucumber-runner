@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 registry=registry.atech.com.br
 image=cucumber
 tag=${registry}/${image}
