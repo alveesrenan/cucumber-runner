@@ -6,5 +6,7 @@ build-test-push:
   stage: pipeline
   services:
     - docker:dind
+  before_script:
+    - chmod 777 -R test
   script:
     - sh pipe.sh
