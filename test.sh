@@ -14,6 +14,10 @@ else
     echo 'Do not exclude container because there is no'
 fi
 
+echo '##################################'
+echo $volume
+echo '##################################'
+
 docker run -v ${volume} -e lock=false --name ${container} ${tag}
 docker_exit_code=`expr $?`
 
