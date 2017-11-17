@@ -15,10 +15,10 @@ build:
     - echo 'Commit'
     - echo ${CI_COMMIT_SHA}
   script:
-    - docker build -t ${fullname}:${CI_COMMIT_SHA} .
-    # - docker tag ${image_name} ${fullname}:latest
-    # - docker push ${fullname}:latest
-    - echo ${fullname}:${CI_COMMIT_SHA}
+    - docker build -t ${image_name} .
+    - docker tag ${image_name} ${fullname}:latest # tag latest version
+    - docker tag ${image_name} ${fullname}:${CI_COMMIT_SHA} # tag current version
+    - docker push ${fullname}:latest
     - docker push ${fullname}:${CI_COMMIT_SHA}
 
 test:
