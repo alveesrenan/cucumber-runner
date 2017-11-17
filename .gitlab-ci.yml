@@ -2,12 +2,6 @@ stages:
   - registry
   - test
 
-cache:
-  key: "$CI_COMMIT_REF_NAME"
-  paths:
-    - /usr/local/bundle/
-    - /usr/local/lib/ruby/gems/
-
 build:
   image: docker:latest
   stage: registry
@@ -19,10 +13,16 @@ build:
 test:
   image: registry.atech.com.br/cucumber-runner
   stage: test
+  cache:
+    key: "$CI_COMMIT_REF_NAME"
+    paths:
+      - test/bundle/
+  variables:
+    BUNDLE_APP_CONFIG: test/bundle
   before_script:
     - cd test/
     - gem install bundler
     - bundle install
-    - pwd
+    - ls -la
   script:
     cucumber
