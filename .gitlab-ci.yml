@@ -6,8 +6,7 @@ cache:
   untracked: true
   key: "$CI_COMMIT_REF_NAME"
   paths:
-    - test/.bundle
-    - test/.gem
+    - /usr/local/bundle
 
 build:
   image: docker:latest
