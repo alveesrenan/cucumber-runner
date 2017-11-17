@@ -23,5 +23,6 @@ test:
     - cd test/
     - gem install bundler
     - bundle install
+    - pwd
   script:
     cucumber
