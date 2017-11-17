@@ -2,16 +2,17 @@ stages:
   - registry
   - test
 
-build-push:
+cache:
+  key: "$CI_BUILD_REF"
+  untracked: true
+
+build:
   image: docker:latest
   stage: registry
   services:
-    - docker:dind
+      - docker:dind
   script:
     - sh build.sh
-  - cache:
-      key: "$CI_BUILD_REF"
-      untracked: true
 
 test:
   image: registry.atech.com.br/cucumber-runner
