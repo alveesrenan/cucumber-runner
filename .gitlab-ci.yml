@@ -25,7 +25,6 @@ test:
   image: registry.atech.com.br/cucumber-runner:${CI_COMMIT_SHA}
   stage: test
   cache:
-    key: "$CI_COMMIT_REF_NAME"
     paths:
       - test/vendor/
   before_script:
