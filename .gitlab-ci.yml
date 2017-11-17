@@ -11,6 +11,9 @@ build:
     image_name: cucumber-runner
     registry_server: registry.atech.com.br
     fullname: ${registry_server}/${image_name}
+  before_script:
+    - echo 'Commit'
+    - echo ${CI_COMMIT_SHA}
   script:
     - docker build -t ${image_name} .
     - docker tag ${image_name} ${fullname}:latest
