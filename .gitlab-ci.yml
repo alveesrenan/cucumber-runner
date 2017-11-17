@@ -3,6 +3,7 @@ stages:
   - test
 
 cache:
+  untracked: true
   key: "$CI_COMMIT_REF_NAME"
   paths:
     - test/.bundle
