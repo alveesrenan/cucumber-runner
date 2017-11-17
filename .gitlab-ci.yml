@@ -34,3 +34,13 @@ test:
     - bundle install
   script:
     cucumber
+
+test2:
+  image: registry.atech.com.br/cucumber-runner:latest
+  stage: test
+  before_script:
+    - cd test/
+    - gem install bundler
+    - bundle install
+  script:
+    cucumber
