@@ -21,7 +21,6 @@ build:
     - docker push ${fullname}:latest
     - docker push ${fullname}:${CI_COMMIT_SHA}
 
-test:
   image: registry.atech.com.br/cucumber-runner:${CI_COMMIT_SHA}
   stage: test
   cache:
@@ -31,16 +30,6 @@ test:
   before_script:
     - cd test/
     - gem install bundler
-    - bundle install
-  script:
-    cucumber
-
-test2:
-  image: registry.atech.com.br/cucumber-runner:latest
-  stage: test
-  before_script:
-    - cd test/
-    - gem install bundler
-    - bundle install
+    - bundle install --path vendor/bundle
   script:
     cucumber
