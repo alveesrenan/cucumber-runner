@@ -4,7 +4,7 @@ if [[ $? != 0 ]]; then
   exit $?
 fi
 
-bundle install
+bundle install --path vendor/bundle
 if [[ $? != 0 ]]; then
   exit $?
 fi
