@@ -8,7 +8,7 @@ build:
   services:
       - docker:dind
   script:
-    - sh build.sh
+    - sh registry.sh
 
 test:
   image: registry.atech.com.br/cucumber-runner
