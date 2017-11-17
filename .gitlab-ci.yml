@@ -7,22 +7,27 @@ build:
   stage: registry
   services:
       - docker:dind
+  variables:
+    image_name: cucumber-runner
+    registry_server: registry.atech.com.br
+    fullname: ${registry_server}/${image_name}
   script:
-    - sh registry.sh
+    - docker build -t ${image_name} .
+    - docker tag ${image_name} ${fullname}:latest
+    - docker tag ${image_name} ${fullname}:${CI_COMMIT_SHA}
+    - docker push ${fullname}:latest
+    - docker push ${fullname}:{CI_COMMIT_SHA}
 
 test:
-  image: registry.atech.com.br/cucumber-runner
+  image: registry.atech.com.br/cucumber-runner:{CI_COMMIT_SHA}
   stage: test
   cache:
     key: "$CI_COMMIT_REF_NAME"
     paths:
-      - test/bundle/
-  variables:
-    BUNDLE_APP_CONFIG: test/bundle
+      - test/vendor/
   before_script:
     - cd test/
     - gem install bundler
     - bundle install
-    - ls -la
   script:
     cucumber
