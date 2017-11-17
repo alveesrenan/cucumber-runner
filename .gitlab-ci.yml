@@ -3,8 +3,8 @@ stages:
   - test
 
 cache:
-  key: "$CI_BUILD_REF"
   untracked: true
+  key: "$CI_COMMIT_REF_NAME"
 
 build:
   image: docker:latest
