@@ -16,10 +16,10 @@ build:
     - docker tag ${image_name} ${fullname}:latest
     - docker tag ${image_name} ${fullname}:${CI_COMMIT_SHA}
     - docker push ${fullname}:latest
-    - docker push ${fullname}:{CI_COMMIT_SHA}
+    - docker push ${fullname}:${CI_COMMIT_SHA}
 
 test:
-  image: registry.atech.com.br/cucumber-runner:{CI_COMMIT_SHA}
+  image: registry.atech.com.br/cucumber-runner:${CI_COMMIT_SHA}
   stage: test
   cache:
     key: "$CI_COMMIT_REF_NAME"
