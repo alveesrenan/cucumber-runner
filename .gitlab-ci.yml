@@ -8,10 +8,13 @@ build-push:
   services:
     - docker:dind
   script:
-    - sh registry.sh
+    - sh build.sh
+  - cache:
+      key: "$CI_BUILD_REF"
+      untracked: true
 
 test:
-  image: registry.atech.com.br/cucumber
+  image: registry.atech.com.br/cucumber-runner
   stage: test
   before_script:
     - cd test/

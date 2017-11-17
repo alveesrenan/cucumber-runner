@@ -1,6 +1,6 @@
 #!/bin/sh
 registry=registry.atech.com.br
-image=cucumber
+image=cucumber-runner
 tag=${registry}/${image}
 
 volume=`pwd`/test:/cucumber/
