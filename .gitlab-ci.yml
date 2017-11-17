@@ -3,10 +3,10 @@ stages:
   - test
 
 cache:
-  untracked: true
   key: "$CI_COMMIT_REF_NAME"
   paths:
-    - /usr/local/bundle
+    - /usr/local/bundle/
+    - /usr/local/lib/ruby/gems/
 
 build:
   image: docker:latest
