@@ -21,6 +21,7 @@ build:
     - docker push ${fullname}:latest
     - docker push ${fullname}:${CI_COMMIT_SHA}
 
+test:
   image: registry.atech.com.br/cucumber-runner:${CI_COMMIT_SHA}
   stage: test
   cache:
