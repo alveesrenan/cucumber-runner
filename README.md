@@ -1,27 +1,17 @@
 # Cucumber #
 
+This docker image run tests using chrome webdriver.
+
 # Requirements
 - Docker-compose [1.13.0+](https://github.com/docker/compose/releases)
 - Connected to Atech's VPN
 
-# Configure registry access
+# Bundle install
+By default, bundle install dependencies in `vendor/bundle` in your volume host folder.
 
-## Allow host docker to use insecure registry
+Make sure you added in .gitignore.
 
-```sh
-sudo echo '{ "insecure-registries": ["10.13.1.15:5000"] }' | sudo tee --append /etc/docker/daemon.json
-sudo service docker restart
-```
-
-## Login in registry
-
-**username:** *atech*
-
-**password:** *atech#123*
-
-```sh
-docker login http://10.13.1.15:5000/
-```
+To change this, pass environment `BUNDLE_INSTALL_PATH` to your container.
 
 # Running your gherkins
 
@@ -32,14 +22,31 @@ docker login http://10.13.1.15:5000/
 **Docker command line example:**
 
 ```sh
-docker run -v `pwd`/test:/cucumber/ -i -t --name my-cucumber-container 10.13.1.15:5000/cucumber
+docker run -v `pwd`/test:/cucumber/ -it --rm \
+  registry.atech.com.br/cucumber-runner
 ```
 
 **Docker compose example:**
 ```yaml
 cucumber:
-    image: 10.13.1.15:5000/cucumber
-    container_name: my-cucumber-container
-    volumes:
-        - ./test:/cucumber
+  image: registry.atech.com.br/cucumber-runner
+  volumes:
+      - ./test:/cucumber
+```
+
+**Passing cucumber options**
+> In this example cucumber only show your version, but if you need other options, replace "--version" for your options.
+
+```sh
+docker run -v `pwd`/test:/cucumber/ -it --rm \
+  registry.atech.com.br/cucumber-runner \
+  --version
+```
+
+```yaml
+cucumber:
+  image: registry.atech.com.br/cucumber-runner
+  volumes:
+      - ./test:/cucumber
+  command: "--version"
 ```

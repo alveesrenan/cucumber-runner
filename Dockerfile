@@ -7,19 +7,19 @@ RUN useradd -ms /bin/bash -d /cucumber/ cucumber
 
 WORKDIR /opt
 
-# phantomjs driver
-ENV phantom_file=phantomjs-2.1.1-linux-x86_64
-RUN wget https://bitbucket.org/ariya/phantomjs/downloads/$phantom_file.tar.bz2 -q
-RUN bzip2 -d $phantom_file.tar.bz2
-RUN tar -xvf $phantom_file.tar
-RUN mv $phantom_file phantomjs
-RUN chown -R cucumber:cucumber phantomjs
+# chrome driver
+RUN apt-get update > /dev/null && apt-get install -y unzip chromedriver libxi6 libgconf-2-4
+RUN wget -q http://chromedriver.storage.googleapis.com/2.28/chromedriver_linux64.zip -P /opt/ && \
+    unzip /opt/chromedriver_linux64.zip -d /opt/ && \
+    chmod +x /opt/chromedriver
 
 # user
 USER cucumber
 WORKDIR /cucumber
 
+RUN gem install bundler cucumber capybara
+
 # startup
 COPY assets/startup.sh /opt/startup.sh
 
-CMD ["/opt/startup.sh"]
+ENTRYPOINT [ "/opt/startup.sh" ]

@@ -4,20 +4,12 @@ image=cucumber-runner
 tag=${registry}/${image}
 
 volume=`pwd`/test:/cucumber/
-container=cucumber-test
-exist_container=`docker ps -a | grep $container | awk '{print $NF}'`
+container=cucumber-runner
 
-if ! [ -z ${exist_container} ]; then
-    echo 'Deleting container...'
-    docker rm ${container}
-else
-    echo 'Do not exclude container because there is no'
-fi
-
-docker run -v ${volume} -e lock=true --name ${container} ${tag}
+docker run -v ${volume} -e lock=false --rm ${tag}
 docker_exit_code=`expr $?`
 
-if [[ ${docker_exit_code} != 0 ]]; then
+if [ ${docker_exit_code} != 0 ]; then
   echo
   echo "[ERROR] Tests failed!"
   exit 1

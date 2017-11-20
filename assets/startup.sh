@@ -1,17 +1,15 @@
 #!/bin/bash
-gem install bundler
+CUCUMBER_OPTIONS=$*
+
+bundle install --path ${BUNDLE_INSTALL_PATH:=vendor/bundle}
 if [[ $? != 0 ]]; then
   exit $?
 fi
 
-bundle install --path vendor/bundle
-if [[ $? != 0 ]]; then
-  exit $?
-fi
-
-cucumber
+cucumber ${CUCUMBER_OPTIONS}
 exit_code=$?
 
+# lock container just using for test
 if ! [ -z $lock ]; then
   if [ $lock == true ]; then
       tail -f /dev/null
@@ -19,4 +17,3 @@ if ! [ -z $lock ]; then
     exit $exit_code
   fi
 fi
-
