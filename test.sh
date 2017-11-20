@@ -1,15 +1,25 @@
 #!/bin/sh
-registry=registry.atech.com.br
-image=cucumber-runner
-tag=${registry}/${image}
+REGISTRY=registry.atech.com.br
+IMAGE=cucumber-runner
+TAG=${REGISTRY}/${IMAGE}
 
-volume=`pwd`/test:/cucumber/
-container=cucumber-runner
+VOLUME=`pwd`/test:/cucumber/
 
-docker run -v ${volume} -e lock=false --rm ${tag}
-docker_exit_code=`expr $?`
+if [ -z $1 ]; then # ./test
+  docker run -it --rm \
+    -v ${VOLUME} \
+    --name=cucumber-test ${TAG}
+  EXIT_CODE=$?
+else # ./test --display
+  docker run -it --rm \
+    -e DISPLAY=$DISPLAY -e LOCK=false \
+    -v /tmp/.X11-unix:/tmp/.X11-unix \
+    -v ${VOLUME} \
+    --name=cucumber-test ${TAG}
+  EXIT_CODE=$?
+fi
 
-if [ ${docker_exit_code} != 0 ]; then
+if [ ${EXIT_CODE} != 0 ]; then
   echo
   echo "[ERROR] Tests failed!"
   exit 1

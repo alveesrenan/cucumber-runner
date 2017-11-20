@@ -31,7 +31,7 @@ docker run -v `pwd`/test:/cucumber/ -it --rm \
 cucumber:
   image: registry.atech.com.br/cucumber-runner
   volumes:
-      - ./test:/cucumber
+    - ./test:/cucumber
 ```
 
 **Passing cucumber options**
@@ -47,7 +47,7 @@ docker run -v `pwd`/test:/cucumber/ -it --rm \
 cucumber:
   image: registry.atech.com.br/cucumber-runner
   volumes:
-      - ./test:/cucumber
+    - ./test:/cucumber
   command: "--version"
 ```
 
@@ -62,6 +62,36 @@ docker run -v `pwd`/test:/cucumber/ -it --rm \
 cucumber:
   image: registry.atech.com.br/cucumber-runner
   volumes:
-      - ./test:/cucumber
-network_mode: "host"
+    - ./test:/cucumber
+  network_mode: "host"
+```
+
+**Open chrome display**
+
+To open host's chrome follow example below:
+
+```sh
+docker run -it --rm \
+  -v `pwd`/test:/cucumber \
+  -v /tmp/.X11-unix:/tmp/.X11-unix \
+  -e DISPLAY=$DISPLAY \
+  registry.atech.com.br/cucumber-runner
+```
+
+**Prevent container exit**
+To prevent container exit, passing environment `LOCK` with true value
+
+```sh
+docker run -v `pwd`/test:/cucumber/ -it --rm \
+  -e LOCK=true \
+  registry.atech.com.br/cucumber-runner
+```
+
+```yaml
+cucumber:
+  image: registry.atech.com.br/cucumber-runner
+  volumes:
+    - ./test:/cucumber
+  environment:
+    - LOCK=true
 ```

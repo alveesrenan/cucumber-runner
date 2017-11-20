@@ -1,25 +1,31 @@
 #!/bin/bash
 CUCUMBER_OPTIONS=$*
 
-bundle install --path ${BUNDLE_INSTALL_PATH:=vendor/bundle}
-exit_code=$?
+gem install bundler
 
-if ! [ -z ${lock} ]; then
-  if [ ${lock} == true ]; then
+bundle install --path ${BUNDLE_INSTALL_PATH:=vendor/bundle}
+EXIT_CODE=$?
+
+if [ ${EXIT_CODE} != 0 ]; then
+  if ! [ -z ${LOCK} ]; then
+    if [ ${LOCK} == true ]; then
       tail -f /dev/null
-  else
-    exit ${exit_code}
+    else
+      exit ${EXIT_CODE}
+    fi
   fi
 fi
 
 cucumber ${CUCUMBER_OPTIONS}
-exit_code=$?
+EXIT_CODE=$?
 
-# lock container just using for test
-if ! [ -z ${lock} ]; then
-  if [ ${lock} == true ]; then
+# LOCK container just using for test
+if ! [ -z ${LOCK} ]; then
+  if [ ${LOCK} == true ]; then
       tail -f /dev/null
   else
-    exit ${exit_code}
+    exit ${EXIT_CODE}
   fi
 fi
+
+exit ${EXIT_CODE}
