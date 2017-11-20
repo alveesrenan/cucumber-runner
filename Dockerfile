@@ -16,6 +16,8 @@ COPY assets/startup.sh /opt/startup.sh
 RUN useradd -ms /bin/bash -d /cucumber/ cucumber
 USER cucumber
 
+RUN gem install bundler
+
 WORKDIR /cucumber
 
 ENTRYPOINT [ "/opt/startup.sh" ]

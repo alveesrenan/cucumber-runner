@@ -1,13 +1,7 @@
 {
   "files.exclude": {
     "test/*_history": true,
-    "test/.*": true,
-    "test/Gemfile.lock": true,
-    ".history/": true
-  },
-  "vsicons.presets.angular": true,
-  "search.exclude": {
-    "test/*_history": true,
+    "test/vendor": true,
     "test/.*": true,
     "test/Gemfile.lock": true,
     ".history/": true

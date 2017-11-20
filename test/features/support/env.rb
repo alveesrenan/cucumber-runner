@@ -1,9 +1,6 @@
-require 'rubygems'
-require 'selenium-webdriver'
 require 'capybara/cucumber'
+require 'selenium-webdriver'
 require 'capybara/rspec'
-require 'httparty'
-require 'byebug'
 
 Capybara.configure do |config|
   config.run_server = false
@@ -13,9 +10,9 @@ Capybara.configure do |config|
 end
 
 Capybara.register_driver :chrome do |app|
-  args = ['--window-size=1200,768', '--headless', '--incognito', '--disable-gpu', "--no-sandbox"]
-  if ENV['DISPLAY']
-    args = ['--window-size=1200,768', '--incognito', '--disable-gpu', "--no-sandbox"]
+  args = ['--window-size=1200,768', '--incognito', '--disable-gpu', "--no-sandbox"]
+  if !ENV['DISPLAY']
+    args.insert(-1, '--headless')
   end
 
   caps = Selenium::WebDriver::Remote::Capabilities.chrome('chromeOptions' => {

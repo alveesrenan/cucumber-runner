@@ -1,8 +1,6 @@
 #!/bin/bash
 CUCUMBER_OPTIONS=$*
 
-gem install bundler
-
 bundle install --path ${BUNDLE_INSTALL_PATH:=vendor/bundle}
 EXIT_CODE=$?
 
