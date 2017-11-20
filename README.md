@@ -50,3 +50,18 @@ cucumber:
       - ./test:/cucumber
   command: "--version"
 ```
+
+**Running using local deployment projects**
+```sh
+docker run -v `pwd`/test:/cucumber/ -it --rm \
+--net=host \
+  registry.atech.com.br/cucumber-runner
+```
+
+```yaml
+cucumber:
+  image: registry.atech.com.br/cucumber-runner
+  volumes:
+      - ./test:/cucumber
+network_mode: "host"
+```
