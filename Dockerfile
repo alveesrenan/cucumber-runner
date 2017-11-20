@@ -15,4 +15,6 @@ RUN gem install bundler cucumber capybara
 # startup
 COPY assets/startup.sh /opt/startup.sh
 
+WORKDIR /cucumber
+
 ENTRYPOINT [ "/opt/startup.sh" ]
