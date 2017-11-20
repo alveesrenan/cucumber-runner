@@ -1,5 +1,5 @@
 #!/bin/bash
-CUCUMBER_OPTIONS=$1
+CUCUMBER_OPTIONS=$*
 
 bundle install --path ${BUNDLE_INSTALL_PATH:=vendor/bundle}
 exit_code=$?
