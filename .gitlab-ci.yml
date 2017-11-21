@@ -18,9 +18,9 @@ build-2.3:
   script:
     - docker build -t ${image_name} -f Dockerfile-${ruby_version} .
     - docker tag ${image_name} ${fullname}:${ruby_version}
-    - docker tag ${image_name} ${fullname}:${ruby-version}-${CI_COMMIT_SHA}
+    - docker tag ${image_name} ${fullname}:${ruby_version}-${CI_COMMIT_SHA}
     - docker push ${fullname}:${ruby_version}
-    - docker push ${fullname}:${ruby-version}-${CI_COMMIT_SHA}
+    - docker push ${fullname}:${ruby_version}-${CI_COMMIT_SHA}
 
 build-2.4:
   image: docker:latest
@@ -38,10 +38,10 @@ build-2.4:
   script:
     - docker build -t ${image_name} -f Dockerfile-${ruby_version} .
     - docker tag ${image_name} ${fullname}:${ruby_version}
-    - docker tag ${image_name} ${fullname}:${ruby-version}-${CI_COMMIT_SHA}
+    - docker tag ${image_name} ${fullname}:${ruby_version}-${CI_COMMIT_SHA}
     - docker tag ${image_name} ${fullname}:latest
     - docker push ${fullname}:${ruby_version}
-    - docker push ${fullname}:${ruby-version}-${CI_COMMIT_SHA}
+    - docker push ${fullname}:${ruby_version}-${CI_COMMIT_SHA}
     - docker push ${fullname}:${ruby_version}
 
 test-2.3:
