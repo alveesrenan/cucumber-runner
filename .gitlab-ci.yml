@@ -2,12 +2,13 @@ stages:
   - registry
   - test
 
-build:
+build-2.3:
   image: docker:latest
   stage: registry
   services:
       - docker:dind
   variables:
+    ruby_version: "2.3"
     image_name: cucumber-runner
     registry_server: registry.atech.com.br
     fullname: ${registry_server}/${image_name}
@@ -15,18 +16,57 @@ build:
     - echo 'Commit'
     - echo ${CI_COMMIT_SHA}
   script:
-    - docker build -t ${image_name} .
-    - docker tag ${image_name} ${fullname}:latest # tag latest version
-    - docker tag ${image_name} ${fullname}:${CI_COMMIT_SHA} # tag current version
-    - docker push ${fullname}:latest
-    - docker push ${fullname}:${CI_COMMIT_SHA}
+    - docker build -t ${image_name} -f Dockerfile-${ruby_version} .
+    - docker tag ${image_name} ${fullname}:${ruby_version}
+    - docker tag ${image_name} ${fullname}:${ruby-version}-${CI_COMMIT_SHA}
+    - docker push ${fullname}:${ruby_version}
+    - docker push ${fullname}:${ruby-version}-${CI_COMMIT_SHA}
 
-test:
-  image: registry.atech.com.br/cucumber-runner:${CI_COMMIT_SHA}
+build-2.4:
+  image: docker:latest
+  stage: registry
+  services:
+      - docker:dind
+  variables:
+    ruby_version: "2.4"
+    image_name: cucumber-runner
+    registry_server: registry.atech.com.br
+    fullname: ${registry_server}/${image_name}
+  before_script:
+    - echo 'Commit'
+    - echo ${CI_COMMIT_SHA}
+  script:
+    - docker build -t ${image_name} -f Dockerfile-${ruby_version} .
+    - docker tag ${image_name} ${fullname}:${ruby_version}
+    - docker tag ${image_name} ${fullname}:${ruby-version}-${CI_COMMIT_SHA}
+    - docker tag ${image_name} ${fullname}:latest
+    - docker push ${fullname}:${ruby_version}
+    - docker push ${fullname}:${ruby-version}-${CI_COMMIT_SHA}
+    - docker push ${fullname}:${ruby_version}
+
+test-2.3:
+  image: registry.atech.com.br/cucumber-runner:${ruby_version}-${CI_COMMIT_SHA}
   stage: test
   cache:
     paths:
       - test/vendor/
+  variables:
+    ruby_version: "2.3"
+  before_script:
+    - cd test/
+    - gem install bundler
+    - bundle install --path vendor/bundle
+  script:
+    cucumber
+
+test-2.4:
+  image: registry.atech.com.br/cucumber-runner:${ruby_version}-${CI_COMMIT_SHA}
+  stage: test
+  cache:
+    paths:
+      - test/vendor/
+  variables:
+    ruby_version: "2.4"
   before_script:
     - cd test/
     - gem install bundler
