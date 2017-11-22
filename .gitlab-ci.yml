@@ -27,13 +27,13 @@ test-2.3:
   stage: test
   variables:
     ruby_version: "2.3"
-  before_script:
-    - pwd
-    - cd test/
-    - bundle install --path vendor/bundle
+  # before_script:
+  #   - pwd
+  #   - cd test/
+  #   - bundle install --path vendor/bundle
   script:
     - echo '####'
-    - cucumber
+    # - cucumber
 
 .build-2.4:
   image: docker:latest
