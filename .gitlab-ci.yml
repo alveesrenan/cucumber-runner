@@ -42,7 +42,7 @@ build-2.4:
     - docker tag ${image_name} ${fullname}:latest
     - docker push ${fullname}:${ruby_version}
     - docker push ${fullname}:${ruby_version}-${CI_COMMIT_SHA}
-    - docker push ${fullname}:${ruby_version}:latest
+    - docker push ${fullname}:latest
 
 build-2.4-oracle:
   image: docker:latest
