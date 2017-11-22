@@ -1,8 +1,10 @@
 #!/bin/bash
 CUCUMBER_OPTIONS=$*
 
+echo '#####################################################'
 ls -la
 pwd
+echo '#####################################################'
 
 bundle install --path ${BUNDLE_INSTALL_PATH:=vendor/bundle}
 
