@@ -1,3 +1,4 @@
+.bundle/
 test/*_history
 test/.*
 test/vendor/
