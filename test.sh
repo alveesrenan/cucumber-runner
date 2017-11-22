@@ -4,22 +4,22 @@ IMAGE=cucumber-runner
 VOLUME=`pwd`/test:/cucumber/
 
 VERSION=latest
-if ! [ -z $2 ]; then # ./test
-  VERSION=$2
+if ! [ -z $1 ]; then # ./test
+  VERSION=$1
 fi
 
 TAG=${REGISTRY}/${IMAGE}:${VERSION}
 
 echo "Runnning tag ${TAG}"
 
-if [ -z $2 ]; then # ./test
+if [ -z $2 ]; then # ./test ${version}
   echo "Running headless chromium"
   docker run --rm \
     -v ${VOLUME} \
     --user=`id -u $USER` \
     --name=cucumber-test ${TAG}
   EXIT_CODE=$?
-else # ./test --display
+else # ./test ${version} --display
   echo "Running chromium with display ${DISPLAY}"
   docker run --rm \
     -e DISPLAY=$DISPLAY -e LOCK=false \
