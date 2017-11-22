@@ -33,6 +33,7 @@ test-2.3:
     ruby_version: "2.3"
   before_script:
     - ls -la /builds/ahead/cucumber-runner/test
+    - docker ps
   script:
     - docker run --rm -v /builds/ahead/cucumber-runner/test:/cucumber registry.atech.com.br/cucumber-runner:${ruby_version}
 
