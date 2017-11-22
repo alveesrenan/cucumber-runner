@@ -17,7 +17,7 @@ if [ -z $2 ]; then # ./test ${version}
   echo "Running headless chromium"
   docker run --rm \
     -v ${VOLUME} \
-    --user=`id -u $USER` \
+    --user=`id -u ${USER}` \
     --name=cucumber-test ${TAG}
   EXIT_CODE=$?
 else # ./test ${version} --display
