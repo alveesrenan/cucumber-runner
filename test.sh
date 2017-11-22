@@ -8,12 +8,12 @@ TAG=${REGISTRY}/${IMAGE}:${VERSION}
 VOLUME=`pwd`/test:/cucumber/
 
 if [ -z $1 ]; then # ./test
-  docker run -it --rm \
+  docker run --rm \
     -v ${VOLUME} \
     --name=cucumber-test ${TAG}
   EXIT_CODE=$?
 else # ./test --display
-  docker run -it --rm \
+  docker run --rm \
     -e DISPLAY=$DISPLAY -e LOCK=false \
     -v /tmp/.X11-unix:/tmp/.X11-unix \
     -v ${VOLUME} \
