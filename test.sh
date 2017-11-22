@@ -1,8 +1,7 @@
 #!/bin/sh
-VERSION=$1
-
 REGISTRY=registry.atech.com.br
 IMAGE=cucumber-runner
+VERSION=2.4
 TAG=${REGISTRY}/${IMAGE}:${VERSION}
 
 VOLUME=`pwd`/test:/cucumber/
@@ -10,7 +9,7 @@ VOLUME=`pwd`/test:/cucumber/
 if [ -z $1 ]; then # ./test
   docker run --rm \
     -v ${VOLUME} \
-    -u `id -u $USER` \
+    --user=`id -u $USER` \
     --name=cucumber-test ${TAG}
   EXIT_CODE=$?
 else # ./test --display
@@ -18,6 +17,7 @@ else # ./test --display
     -e DISPLAY=$DISPLAY -e LOCK=false \
     -v /tmp/.X11-unix:/tmp/.X11-unix \
     -v ${VOLUME} \
+    --user=`id -u $USER` \
     --name=cucumber-test ${TAG}
   EXIT_CODE=$?
 fi
