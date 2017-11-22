@@ -12,7 +12,7 @@ TAG=${REGISTRY}/${IMAGE}:${VERSION}
 
 echo "Runnning tag ${TAG}"
 
-if [ -z $1 ]; then # ./test
+if [ -z $2 ]; then # ./test
   echo "Running headless chromium"
   docker run --rm \
     -v ${VOLUME} \
