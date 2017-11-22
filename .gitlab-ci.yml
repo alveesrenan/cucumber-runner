@@ -1,6 +1,6 @@
 stages:
   - registry
-  # - test
+  - test
 
 build-2.3:
   image: docker:latest
@@ -94,7 +94,7 @@ test-2.4:
   script:
     cucumber
 
-test-2.4:-oracle:
+test-2.4-oracle:
   image: registry.atech.com.br/cucumber-runner:${ruby_version}-oracle-${CI_COMMIT_SHA}
   stage: test
   cache:
