@@ -14,6 +14,7 @@ RUN wget -q http://chromedriver.storage.googleapis.com/2.29/chromedriver_linux64
 COPY assets/cucumber-entrypoint.sh /opt/cucumber-entrypoint.sh
 
 WORKDIR /cucumber
-RUN gem install cucumber
+
+VOLUME
 
 ENTRYPOINT [ "/opt/cucumber-entrypoint.sh" ]

@@ -1,22 +1,22 @@
 #!/bin/bash
-CUCUMBER_OPTIONS=$*
+OPTIONS=$*
 
-# bundle install --path ${BUNDLE_INSTALL_PATH:=vendor/bundle}
-# EXIT_CODE=$?
+bundle install --path ${BUNDLE_INSTALL_PATH:=vendor/bundle}
 
-# if [ ${EXIT_CODE} != 0 ]; then
-#   echo 'Error during bundle install'
-#   if ! [ -z ${LOCK} ]; then
-#     if [ ${LOCK} == true ]; then
-#       tail -f /dev/null
-#     else
-#       echo "Error ${EXIT_CODE}"
-#       exit ${EXIT_CODE}
-#     fi
-#   fi
-# fi
+EXIT_CODE=$?
 
-cucumber ${CUCUMBER_OPTIONS}
+if [ ${EXIT_CODE} != 0 ]; then
+  echo 'Error during bundle install'
+  if ! [ -z ${LOCK} ]; then
+    if [ ${LOCK} == true ]; then
+      tail -f /dev/null
+    else
+      exit ${EXIT_CODE}
+    fi
+  fi
+fi
+
+cucumber ${OPTIONS}
 EXIT_CODE=$?
 
 # LOCK container just using for test
