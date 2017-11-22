@@ -2,12 +2,8 @@ FROM registry.atech.com.br/cucumber-runner:2.4
 
 USER root
 
-ADD assets/oracle/instantclient-basic-linux.x64-12.2.0.1.0.tar.gz /opt/oracle/
-ADD assets/oracle/instantclient-sdk-linux.x64-12.2.0.1.0.tar.gz /tmp/sdk
-ADD assets/oracle/instantclient-sqlplus-linux.x64-12.2.0.1.0.tar.gz /tmp/sqlplus
+ADD assets/oracle/instantclient_12_2.tar.gz /opt/oracle/
 
-RUN cp -R /tmp/sdk/instantclient_12_2/sdk/* /opt/oracle/instantclient_12_2
-RUN cp -R /tmp/sqlplus/instantclient_12_2/* /opt/oracle/instantclient_12_2
-RUN ln -s /opt/oracle/libclntsh.so.10.1 /opt/oracle/libclntsh.so
+ENV LD_LIBRARY_PATH=/opt/oracle/instantclient_12_2
 
-RUN export all LD_LIBRARY_PATH=/opt/oracle/instantclient_12_2
+USER cucumber

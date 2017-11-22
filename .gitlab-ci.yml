@@ -2,7 +2,7 @@ stages:
   - registry
   # - test
 
-.build-2.3:
+build-2.3:
   image: docker:latest
   stage: registry
   services:
@@ -22,7 +22,7 @@ stages:
     - docker push ${fullname}:${ruby_version}
     - docker push ${fullname}:${ruby_version}-${CI_COMMIT_SHA}
 
-.build-2.4:
+build-2.4:
   image: docker:latest
   stage: registry
   services:
@@ -42,7 +42,7 @@ stages:
     - docker tag ${image_name} ${fullname}:latest
     - docker push ${fullname}:${ruby_version}
     - docker push ${fullname}:${ruby_version}-${CI_COMMIT_SHA}
-    - docker push ${fullname}:${ruby_version}
+    - docker push ${fullname}:${ruby_version}:latest
 
 build-2.4-oracle:
   image: docker:latest
@@ -51,7 +51,7 @@ build-2.4-oracle:
       - docker:dind
   variables:
     ruby_version: "2.4"
-    image_name: cucumber-runner-oracle
+    image_name: cucumber-runner
     registry_server: registry.atech.com.br
     fullname: ${registry_server}/${image_name}
   before_script:
@@ -59,14 +59,12 @@ build-2.4-oracle:
     - echo ${CI_COMMIT_SHA}
   script:
     - docker build -t ${image_name} -f Dockerfile-${ruby_version}-oracle .
-    - docker tag ${image_name} ${fullname}:${ruby_version}
-    - docker tag ${image_name} ${fullname}:${ruby_version}-${CI_COMMIT_SHA}
-    - docker tag ${image_name} ${fullname}:latest
-    - docker push ${fullname}:${ruby_version}
-    - docker push ${fullname}:${ruby_version}-${CI_COMMIT_SHA}
-    - docker push ${fullname}:${ruby_version}
+    - docker tag ${image_name} ${fullname}:${ruby_version}-oracle
+    - docker tag ${image_name} ${fullname}:${ruby_version}-oracle-${CI_COMMIT_SHA}
+    - docker push ${fullname}:${ruby_version}-oracle
+    - docker push ${fullname}:${ruby_version}-oracle-${CI_COMMIT_SHA}
 
-.test-2.3:
+test-2.3:
   image: registry.atech.com.br/cucumber-runner:${ruby_version}-${CI_COMMIT_SHA}
   stage: test
   cache:
@@ -81,8 +79,23 @@ build-2.4-oracle:
   script:
     cucumber
 
-.test-2.4:
+test-2.4:
   image: registry.atech.com.br/cucumber-runner:${ruby_version}-${CI_COMMIT_SHA}
+  stage: test
+  cache:
+    paths:
+      - test/vendor/
+  variables:
+    ruby_version: "2.4"
+  before_script:
+    - cd test/
+    - gem install bundler
+    - bundle install --path vendor/bundle
+  script:
+    cucumber
+
+test-2.4:-oracle:
+  image: registry.atech.com.br/cucumber-runner:${ruby_version}-oracle-${CI_COMMIT_SHA}
   stage: test
   cache:
     paths:
