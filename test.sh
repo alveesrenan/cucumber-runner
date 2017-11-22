@@ -11,6 +11,7 @@ fi
 TAG=${REGISTRY}/${IMAGE}:${VERSION}
 
 echo "Runnning tag ${TAG}"
+echo "With volume ${VOLUME}"
 
 if [ -z $2 ]; then # ./test ${version}
   echo "Running headless chromium"
