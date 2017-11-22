@@ -1,4 +1,5 @@
 #!/bin/bash
+CUCUMBER_OPTIONS=$*
 bundle install --path ${BUNDLE_INSTALL_PATH:=vendor/bundle}
 
 EXIT_CODE=$?
@@ -14,7 +15,7 @@ if [ ${EXIT_CODE} != 0 ]; then
   fi
 fi
 
-cucumber ${OPTIONS}
+cucumber ${CUCUMBER_OPTIONS}
 EXIT_CODE=$?
 
 # LOCK container just using for test
