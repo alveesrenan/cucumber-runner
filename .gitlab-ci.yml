@@ -32,7 +32,7 @@ test-2.3:
   variables:
     ruby_version: "2.3"
   script:
-    - ./test.sh ${ruby_version}-${CI_COMMIT_SHA}
+    - sh test.sh ${ruby_version}-${CI_COMMIT_SHA}
 
 .build-2.4:
   image: docker:latest
