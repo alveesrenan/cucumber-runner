@@ -1,10 +1,16 @@
 #!/bin/sh
 REGISTRY=registry.atech.com.br
 IMAGE=cucumber-runner
-VERSION=2.4
+VOLUME=`pwd`/test:/cucumber/
+
+VERSION=latest
+if ! [ -z $2 ]; then # ./test
+  VERSION=$2
+fi
+
 TAG=${REGISTRY}/${IMAGE}:${VERSION}
 
-VOLUME=`pwd`/test:/cucumber/
+echo "Runnning tag ${TAG}"
 
 if [ -z $1 ]; then # ./test
   docker run --rm \
