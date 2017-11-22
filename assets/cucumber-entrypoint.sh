@@ -1,20 +1,20 @@
 #!/bin/bash
 CUCUMBER_OPTIONS=$*
 
-bundle install --path ${BUNDLE_INSTALL_PATH:=vendor/bundle}
-EXIT_CODE=$?
+# bundle install --path ${BUNDLE_INSTALL_PATH:=vendor/bundle}
+# EXIT_CODE=$?
 
-if [ ${EXIT_CODE} != 0 ]; then
-  echo 'Error during bundle install'
-  if ! [ -z ${LOCK} ]; then
-    if [ ${LOCK} == true ]; then
-      tail -f /dev/null
-    else
-      echo "Error ${EXIT_CODE}"
-      exit ${EXIT_CODE}
-    fi
-  fi
-fi
+# if [ ${EXIT_CODE} != 0 ]; then
+#   echo 'Error during bundle install'
+#   if ! [ -z ${LOCK} ]; then
+#     if [ ${LOCK} == true ]; then
+#       tail -f /dev/null
+#     else
+#       echo "Error ${EXIT_CODE}"
+#       exit ${EXIT_CODE}
+#     fi
+#   fi
+# fi
 
 cucumber ${CUCUMBER_OPTIONS}
 EXIT_CODE=$?
