@@ -1,7 +1,7 @@
 #!/bin/bash
 CUCUMBER_OPTIONS=$*
 
-bundle install --gemfile=test/Gemfile --path ${BUNDLE_INSTALL_PATH:=vendor/bundle}
+bundle install ${BUNDLE_INSTALL_PATH:=vendor/bundle}
 
 EXIT_CODE=$?
 
