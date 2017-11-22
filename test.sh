@@ -1,7 +1,9 @@
 #!/bin/sh
+VERSION=$1
+
 REGISTRY=registry.atech.com.br
 IMAGE=cucumber-runner
-TAG=${REGISTRY}/${IMAGE}
+TAG=${REGISTRY}/${IMAGE}:${VERSION}
 
 VOLUME=`pwd`/test:/cucumber/
 

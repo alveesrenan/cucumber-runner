@@ -2,11 +2,12 @@ stages:
   - registry
   - test
 
+services:
+    - docker:dind
+
 build-2.3:
   image: docker:latest
   stage: registry
-  services:
-      - docker:dind
   variables:
     ruby_version: "2.3"
     image_name: cucumber-runner
@@ -23,21 +24,19 @@ build-2.3:
     - docker push ${fullname}:${ruby_version}-${CI_COMMIT_SHA}
 
 test-2.3:
-  image: registry.atech.com.br/cucumber-runner:${ruby_version}-${CI_COMMIT_SHA}
+  image: docker:latest
   stage: test
+  cache:
+    paths:
+      - test/vendor/
   variables:
     ruby_version: "2.3"
-  before_script:
-    - cd test/
-    - pwd
   script:
-    - cucumber
+    - ./test.sh ${ruby_version}-${CI_COMMIT_SHA}
 
 .build-2.4:
   image: docker:latest
   stage: registry
-  services:
-      - docker:dind
   variables:
     ruby_version: "2.4"
     image_name: cucumber-runner
@@ -73,8 +72,6 @@ test-2.3:
 .build-2.4-oracle:
   image: docker:latest
   stage: registry
-  services:
-      - docker:dind
   variables:
     ruby_version: "2.4"
     image_name: cucumber-runner

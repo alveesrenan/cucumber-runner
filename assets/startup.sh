@@ -1,8 +1,6 @@
 #!/bin/bash
 CUCUMBER_OPTIONS=$*
 
-pwd
-ls -la
 bundle install --path ${BUNDLE_INSTALL_PATH:=vendor/bundle}
 EXIT_CODE=$?
 
