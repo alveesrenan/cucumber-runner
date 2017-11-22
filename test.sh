@@ -16,6 +16,7 @@ echo "With volume ${VOLUME}"
 if [ -z $2 ]; then # ./test ${version}
   echo "Running headless chromium"
   docker run --rm \
+    -e LOCK=false \
     -v ${VOLUME} \
     --user=`id -u ${USER}` \
     --name=cucumber-test ${TAG}

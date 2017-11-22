@@ -29,10 +29,11 @@ docker run -v `pwd`/test:/cucumber/ -it --rm \
 ```
 
 **Passing cucumber options**
-> In this example cucumber only show your version, but if you need other options, replace "--version" for your options.
+> In this example cucumber only show your version, but if you need other options, replace "--version" in `OPTIONS` environment.
 
 ```sh
 docker run -v `pwd`/test:/cucumber/ -it --rm \
+  -e OPTIONS='--version' \
   --user=`id -u $USER` \
   registry.atech.com.br/cucumber-runner \
   --version
