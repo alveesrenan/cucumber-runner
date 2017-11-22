@@ -10,6 +10,7 @@ VOLUME=`pwd`/test:/cucumber/
 if [ -z $1 ]; then # ./test
   docker run --rm \
     -v ${VOLUME} \
+    -u `id -u $USER` \
     --name=cucumber-test ${TAG}
   EXIT_CODE=$?
 else # ./test --display
