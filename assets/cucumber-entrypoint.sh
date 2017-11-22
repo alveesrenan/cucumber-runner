@@ -1,7 +1,7 @@
 #!/bin/bash
 CUCUMBER_OPTIONS=$*
-bundle install --path ${BUNDLE_INSTALL_PATH:=vendor/bundle}
 
+bundle install --path ${BUNDLE_INSTALL_PATH:=vendor/bundle}
 EXIT_CODE=$?
 
 if [ ${EXIT_CODE} != 0 ]; then
@@ -10,6 +10,7 @@ if [ ${EXIT_CODE} != 0 ]; then
     if [ ${LOCK} == true ]; then
       tail -f /dev/null
     else
+      echo "Error ${EXIT_CODE}"
       exit ${EXIT_CODE}
     fi
   fi
