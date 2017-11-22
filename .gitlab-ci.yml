@@ -32,7 +32,7 @@ test-2.3:
   variables:
     ruby_version: "2.3"
   script:
-    - docker run --rm -v /builds/ahead/cucumber-runner/test:/cucumber --name=cucumber-test ${TAG}
+    - docker run --rm -v /builds/ahead/cucumber-runner/test:/cucumber registry.atech.com.br/cucumber-runner:${ruby_version}
 
 
 .build-2.4:
