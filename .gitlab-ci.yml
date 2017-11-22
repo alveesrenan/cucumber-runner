@@ -2,17 +2,19 @@ stages:
   - registry
   - test
 
+variables:
+  image_name: cucumber-runner
+  registry_server: registry.atech.com.br
+  fullname: ${registry_server}/${image_name}
+
 services:
-    - docker:dind
+  - docker:dind
 
 build-2.3:
   image: docker:latest
   stage: registry
   variables:
     ruby_version: "2.3"
-    image_name: cucumber-runner
-    registry_server: registry.atech.com.br
-    fullname: ${registry_server}/${image_name}
   before_script:
     - echo 'Commit'
     - echo ${CI_COMMIT_SHA}
@@ -24,7 +26,7 @@ build-2.3:
     - docker push ${fullname}:${ruby_version}-${CI_COMMIT_SHA}
 
 test-2.3:
-  image: docker:latest
+  image: ${fullname}:${ruby_version}-${CI_COMMIT_SHA}
   stage: test
   cache:
     paths:
@@ -32,8 +34,9 @@ test-2.3:
   variables:
     ruby_version: "2.3"
   before_script:
-    - echo $DOCKER_HOST
-    - echo '################'
+    - echo 'AhAHAHAHHAHAHHAA'
+    - ls -la
+    - pwd
   script:
     - docker run --rm -v /builds/ahead/cucumber-runner/test:/cucumber registry.atech.com.br/cucumber-runner:${ruby_version}
 
