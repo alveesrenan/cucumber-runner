@@ -1,7 +1,5 @@
 #!/bin/bash
-CUCUMBER_OPTIONS=$*
-
-bundle install --path ${BUNDLE_INSTALL_PATH:=vendor/bundle}
+bundle install --gemfile=test/Gemfile --path ${BUNDLE_INSTALL_PATH:=vendor/bundle}
 
 EXIT_CODE=$?
 
@@ -16,7 +14,7 @@ if [ ${EXIT_CODE} != 0 ]; then
   fi
 fi
 
-exec "$@"
+exec cucumber "$@"
 EXIT_CODE=$?
 
 # LOCK container just using for test
