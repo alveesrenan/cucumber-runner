@@ -25,9 +25,6 @@ build-2.3:
 test-2.3:
   image: registry.atech.com.br/cucumber-runner:${ruby_version}-${CI_COMMIT_SHA}
   stage: test
-  cache:
-    paths:
-      - test/vendor/
   variables:
     ruby_version: "2.3"
   before_script:
