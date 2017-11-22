@@ -16,7 +16,7 @@ if [ ${EXIT_CODE} != 0 ]; then
   fi
 fi
 
-cucumber ${CUCUMBER_OPTIONS}
+exec "$@"
 EXIT_CODE=$?
 
 # LOCK container just using for test

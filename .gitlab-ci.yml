@@ -33,9 +33,10 @@ test-2.3:
       - test/vendor/
   variables:
     ruby_version: "2.3"
+  before_script:
+    - cd test/
   script:
-    - "-r feature"
-
+    - cucumber
 
 .build-2.4:
   image: docker:latest
