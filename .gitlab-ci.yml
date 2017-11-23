@@ -22,7 +22,20 @@ build-2.3:
     - docker push ${fullname}:${ruby_version}
     - docker push ${fullname}:${ruby_version}-${CI_COMMIT_SHA}
 
-build-2.4:
+test-2.3:
+  image: registry.atech.com.br/cucumber-runner:${ruby_version}-${CI_COMMIT_SHA}
+  stage: test
+  variables:
+    ruby_version: "2.3"
+  before_script:
+    - pwd
+    - cd test/
+    - bundle install --path vendor/bundle
+  script:
+    - echo '####'
+    - cucumber
+
+.build-2.4:
   image: docker:latest
   stage: registry
   services:
@@ -44,7 +57,22 @@ build-2.4:
     - docker push ${fullname}:${ruby_version}-${CI_COMMIT_SHA}
     - docker push ${fullname}:latest
 
-build-2.4-oracle:
+.test-2.4:
+  image: registry.atech.com.br/cucumber-runner:${ruby_version}-${CI_COMMIT_SHA}
+  stage: test
+  cache:
+    paths:
+      - test/vendor/
+  variables:
+    ruby_version: "2.4"
+  before_script:
+    - cd test/
+    - gem install bundler
+    - bundle install --path vendor/bundle
+  script:
+    - cucumber
+
+.build-2.4-oracle:
   image: docker:latest
   stage: registry
   services:
@@ -64,37 +92,7 @@ build-2.4-oracle:
     - docker push ${fullname}:${ruby_version}-oracle
     - docker push ${fullname}:${ruby_version}-oracle-${CI_COMMIT_SHA}
 
-test-2.3:
-  image: registry.atech.com.br/cucumber-runner:${ruby_version}-${CI_COMMIT_SHA}
-  stage: test
-  cache:
-    paths:
-      - test/vendor/
-  variables:
-    ruby_version: "2.3"
-  before_script:
-    - cd test/
-    - gem install bundler
-    - bundle install --path vendor/bundle
-  script:
-    cucumber
-
-test-2.4:
-  image: registry.atech.com.br/cucumber-runner:${ruby_version}-${CI_COMMIT_SHA}
-  stage: test
-  cache:
-    paths:
-      - test/vendor/
-  variables:
-    ruby_version: "2.4"
-  before_script:
-    - cd test/
-    - gem install bundler
-    - bundle install --path vendor/bundle
-  script:
-    cucumber
-
-test-2.4-oracle:
+.test-2.4-oracle:
   image: registry.atech.com.br/cucumber-runner:${ruby_version}-oracle-${CI_COMMIT_SHA}
   stage: test
   cache:
@@ -107,4 +105,4 @@ test-2.4-oracle:
     - gem install bundler
     - bundle install --path vendor/bundle
   script:
-    cucumber
+    - cucumber
