@@ -1,7 +1,9 @@
-version: "3"
+version: "3.3"
+
 services:
+
   cucumber:
-      image: 10.13.1.15:5000/cucumber
+      image: registry.atech.com.br/cucumber
       container_name: my-cucumber-container
       volumes:
-          - ./test:/cucumber
+        - ./test:/cucumber
