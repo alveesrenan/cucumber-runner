@@ -5,6 +5,7 @@ This docker image run tests using chrome webdriver.
 # Requirements
 - Docker-compose [1.13.0+](https://github.com/docker/compose/releases)
 - Connected to Atech's VPN
+- Pass user when you run container, docker param: `--user=UID`, learn more below.
 
 # Bundle install
 By default, bundle install dependencies in `vendor/bundle` in your volume host folder.
@@ -23,47 +24,26 @@ To change this, pass environment `BUNDLE_INSTALL_PATH` to your container.
 
 ```sh
 docker run -v `pwd`/test:/cucumber/ -it --rm \
+  --user=`id -u $USER` \
   registry.atech.com.br/cucumber-runner
 ```
 
-**Docker compose example:**
-```yaml
-cucumber:
-  image: registry.atech.com.br/cucumber-runner
-  volumes:
-    - ./test:/cucumber
-```
-
 **Passing cucumber options**
-> In this example cucumber only show your version, but if you need other options, replace "--version" for your options.
+> In this example cucumber only show your version, but if you need other options, replace "--version".
 
 ```sh
 docker run -v `pwd`/test:/cucumber/ -it --rm \
+  --user=`id -u $USER` \
   registry.atech.com.br/cucumber-runner \
   --version
-```
-
-```yaml
-cucumber:
-  image: registry.atech.com.br/cucumber-runner
-  volumes:
-    - ./test:/cucumber
-  command: "--version"
 ```
 
 **Running using local deployment projects**
 ```sh
 docker run -v `pwd`/test:/cucumber/ -it --rm \
---net=host \
+  --net=host \
+  --user=`id -u $USER` \
   registry.atech.com.br/cucumber-runner
-```
-
-```yaml
-cucumber:
-  image: registry.atech.com.br/cucumber-runner
-  volumes:
-    - ./test:/cucumber
-  network_mode: "host"
 ```
 
 **Open chrome display**
@@ -72,6 +52,7 @@ To open host's chrome follow example below:
 
 ```sh
 docker run -it --rm \
+  --user=`id -u $USER` \
   -v `pwd`/test:/cucumber \
   -v /tmp/.X11-unix:/tmp/.X11-unix \
   -e DISPLAY=$DISPLAY \
@@ -85,13 +66,4 @@ To prevent container exit, passing environment `LOCK` with true value
 docker run -v `pwd`/test:/cucumber/ -it --rm \
   -e LOCK=true \
   registry.atech.com.br/cucumber-runner
-```
-
-```yaml
-cucumber:
-  image: registry.atech.com.br/cucumber-runner
-  volumes:
-    - ./test:/cucumber
-  environment:
-    - LOCK=true
 ```

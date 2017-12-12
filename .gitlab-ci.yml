@@ -2,107 +2,51 @@ stages:
   - registry
   - test
 
+variables:
+  image_name: cucumber-runner
+  registry_server: registry.atech.com.br
+  fullname: ${registry_server}/${image_name}
+
+services:
+  - docker:dind
+
 build-2.3:
   image: docker:latest
   stage: registry
-  services:
-      - docker:dind
   variables:
-    ruby_version: "2.3"
-    image_name: cucumber-runner
-    registry_server: registry.atech.com.br
-    fullname: ${registry_server}/${image_name}
-  before_script:
-    - echo 'Commit'
-    - echo ${CI_COMMIT_SHA}
+    runner_version: "2.3"
   script:
-    - docker build -t ${image_name} -f Dockerfile-${ruby_version} .
-    - docker tag ${image_name} ${fullname}:${ruby_version}
-    - docker tag ${image_name} ${fullname}:${ruby_version}-${CI_COMMIT_SHA}
-    - docker push ${fullname}:${ruby_version}
-    - docker push ${fullname}:${ruby_version}-${CI_COMMIT_SHA}
+    - docker build -t ${image_name} -f Dockerfile-${runner_version} .
+    - docker tag ${image_name} ${fullname}:${runner_version}
+    - docker tag ${image_name} ${fullname}:${runner_version}-${CI_COMMIT_SHA}
+    - docker push ${fullname}:${runner_version}
+    - docker push ${fullname}:${runner_version}-${CI_COMMIT_SHA}
 
-test-2.3:
-  image: registry.atech.com.br/cucumber-runner:${ruby_version}-${CI_COMMIT_SHA}
-  stage: test
-  variables:
-    ruby_version: "2.3"
-  before_script:
-    - pwd
-    - cd test/
-    - bundle install --path vendor/bundle
-  script:
-    - echo '####'
-    - cucumber
-
-.build-2.4:
+build-2.4:
   image: docker:latest
   stage: registry
-  services:
-      - docker:dind
   variables:
-    ruby_version: "2.4"
-    image_name: cucumber-runner
-    registry_server: registry.atech.com.br
-    fullname: ${registry_server}/${image_name}
-  before_script:
-    - echo 'Commit'
-    - echo ${CI_COMMIT_SHA}
+    runner_version: "2.4"
   script:
-    - docker build -t ${image_name} -f Dockerfile-${ruby_version} .
-    - docker tag ${image_name} ${fullname}:${ruby_version}
-    - docker tag ${image_name} ${fullname}:${ruby_version}-${CI_COMMIT_SHA}
+    - docker build -t ${image_name} -f Dockerfile-${runner_version} .
+    - docker tag ${image_name} ${fullname}:${runner_version}
+    - docker tag ${image_name} ${fullname}:${runner_version}-${CI_COMMIT_SHA}
     - docker tag ${image_name} ${fullname}:latest
-    - docker push ${fullname}:${ruby_version}
-    - docker push ${fullname}:${ruby_version}-${CI_COMMIT_SHA}
+    - docker push ${fullname}:${runner_version}
+    - docker push ${fullname}:${runner_version}-${CI_COMMIT_SHA}
     - docker push ${fullname}:latest
 
-.test-2.4:
-  image: registry.atech.com.br/cucumber-runner:${ruby_version}-${CI_COMMIT_SHA}
-  stage: test
-  cache:
-    paths:
-      - test/vendor/
-  variables:
-    ruby_version: "2.4"
-  before_script:
-    - cd test/
-    - gem install bundler
-    - bundle install --path vendor/bundle
-  script:
-    - cucumber
-
-.build-2.4-oracle:
+build-2.4-oracle:
   image: docker:latest
   stage: registry
-  services:
-      - docker:dind
   variables:
-    ruby_version: "2.4"
-    image_name: cucumber-runner
-    registry_server: registry.atech.com.br
-    fullname: ${registry_server}/${image_name}
+    runner_version: "2.4-oracle"
   before_script:
     - echo 'Commit'
     - echo ${CI_COMMIT_SHA}
   script:
-    - docker build -t ${image_name} -f Dockerfile-${ruby_version}-oracle .
-    - docker tag ${image_name} ${fullname}:${ruby_version}-oracle
-    - docker tag ${image_name} ${fullname}:${ruby_version}-oracle-${CI_COMMIT_SHA}
-    - docker push ${fullname}:${ruby_version}-oracle
-    - docker push ${fullname}:${ruby_version}-oracle-${CI_COMMIT_SHA}
-
-.test-2.4-oracle:
-  image: registry.atech.com.br/cucumber-runner:${ruby_version}-oracle-${CI_COMMIT_SHA}
-  stage: test
-  cache:
-    paths:
-      - test/vendor/
-  variables:
-    ruby_version: "2.4"
-  before_script:
-    - cd test/
-    - gem install bundler
-    - bundle install --path vendor/bundle
-  script:
-    - cucumber
+    - docker build -t ${image_name} -f Dockerfile-${runner_version} .
+    - docker tag ${image_name} ${fullname}:${runner_version}
+    - docker tag ${image_name} ${fullname}:${runner_version}-${CI_COMMIT_SHA}
+    - docker push ${fullname}:${runner_version}
+    - docker push ${fullname}:${runner_version}-${CI_COMMIT_SHA}

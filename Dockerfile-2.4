@@ -13,13 +13,8 @@ RUN wget -q http://chromedriver.storage.googleapis.com/2.28/chromedriver_linux64
     chmod +x /usr/local/bin/chromedriver
 
 # startup
-COPY assets/startup.sh /opt/startup.sh
-
-RUN useradd -ms /bin/bash -d /cucumber/ cucumber
-USER cucumber
-
-RUN gem install bundler cucumber
+COPY assets/cucumber-entrypoint.sh /opt/cucumber-entrypoint.sh
 
 WORKDIR /cucumber
 
-ENTRYPOINT [ "/opt/startup.sh" ]
+ENTRYPOINT [ "/opt/cucumber-entrypoint.sh" ]
