@@ -47,6 +47,6 @@ build-2.4-oracle:
   script:
     - docker build -t ${image_name} -f Dockerfile-${runner_version}-oracle .
     - docker tag ${image_name} ${fullname}:${runner_version}-oracle
-    - docker tag ${image_name} ${fullname}:${runner_version}-oracle-${CI_COMMIT_SHA}
+    - docker tag ${image_name} ${fullname}:${runner_version}-${CI_COMMIT_SHA}
     - docker push ${fullname}:${runner_version}-oracle
-    - docker push ${fullname}:${runner_version}--oracle${CI_COMMIT_SHA}
+    - docker push ${fullname}:${runner_version}-${CI_COMMIT_SHA}
