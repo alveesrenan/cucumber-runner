@@ -6,11 +6,11 @@ WORKDIR /opt
 
 # chrome driver
 RUN apt-get update > /dev/null && apt-get install -y unzip chromedriver libxi6 libgconf-2-4
-RUN wget -q http://chromedriver.storage.googleapis.com/2.28/chromedriver_linux64.zip -P /home/ && \
-    unzip /home/chromedriver_linux64.zip -d /usr/local/share/ && \
-    ln -s /usr/local/share/chromedriver /usr/local/bin/chromedriver && \
-    ln -s /usr/local/share/chromedriver /usr/bin/chromedriver && \
-    chmod +x /usr/local/bin/chromedriver
+
+# chrome driver version: 2.28.455506
+COPY assets/chromedriver/chromedriver_linux64.zip /opt/
+
+RUN unzip /opt/chromedriver_linux64.zip -d /opt/ && chmod +x /opt/chromedriver
 
 # startup
 COPY assets/cucumber-entrypoint.sh /opt/cucumber-entrypoint.sh
