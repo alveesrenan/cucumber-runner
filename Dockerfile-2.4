@@ -15,12 +15,6 @@ RUN unzip /opt/chromedriver_linux64.zip -d /opt/ && chmod +x /opt/chromedriver
 # startup
 COPY assets/cucumber-entrypoint.sh /opt/cucumber-entrypoint.sh
 
-RUN useradd -ms /bin/bash -d /cucumber/ cucumber
-
-USER cucumber
-
-RUN gem install bundler cucumber
-
 WORKDIR /cucumber
 
 ENTRYPOINT [ "/opt/cucumber-entrypoint.sh" ]
