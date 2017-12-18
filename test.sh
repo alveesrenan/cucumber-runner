@@ -24,7 +24,7 @@ if [ -z $2 ]; then # ./test ${version}
 else # ./test ${version} --display
   echo "Running chromium with display ${DISPLAY}"
   docker run --rm \
-    -e DISPLAY=$DISPLAY -e LOCK=false \
+    -e "DISPLAY=$DISPLAY" -e "LOCK=false" \
     -v /tmp/.X11-unix:/tmp/.X11-unix \
     -v ${VOLUME} \
     --user=`id -u $USER` \
