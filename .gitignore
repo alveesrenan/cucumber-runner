@@ -1,6 +1,14 @@
-.bundle/
 test/*_history
 test/.*
 test/vendor/
 test/features/screenshots/
+
+.bundle/
 .history/
+.byebug_history
+.bash_history
+.gem
+.pki
+.config/
+.idea/
+.vscode/
