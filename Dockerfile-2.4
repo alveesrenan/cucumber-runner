@@ -7,10 +7,10 @@ WORKDIR /opt
 # chrome driver
 RUN apt-get update > /dev/null && apt-get install -y unzip chromedriver libxi6 libgconf-2-4 build-essential libaio-dev
 
-# chrome driver version 2.29
-COPY assets/chromedriver/chromedriver_linux64_2_29.zip /opt/
+# chrome driver version 2.38
+COPY assets/chromedriver/chromedriver_linux64_2_38.zip /opt/
 
-RUN unzip /opt/chromedriver_linux64_2_29.zip -d /opt/ && \
+RUN unzip /opt/chromedriver_linux64_2_38.zip -d /opt/ && \
     chmod +x /opt/chromedriver
 
 # oracle driver
