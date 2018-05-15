@@ -4,7 +4,6 @@ This docker image run tests using chrome webdriver.
 
 # Requirements
 - Docker-compose [1.13.0+](https://github.com/docker/compose/releases)
-- Connected to Atech's VPN
 - Pass user when you run container, docker param: `--user=UID`, learn more below.
 
 # Bundle install
@@ -25,7 +24,7 @@ To change this, pass environment `BUNDLE_INSTALL_PATH` to your container.
 ```sh
 docker run -v `pwd`/test:/cucumber/ -it --rm \
   --user=`id -u $USER` \
-  registry.atech.com.br/cucumber-runner
+  ${REGISTRY_SERVER}/cucumber-runner
 ```
 
 **Passing cucumber options**
@@ -34,7 +33,7 @@ docker run -v `pwd`/test:/cucumber/ -it --rm \
 ```sh
 docker run -v `pwd`/test:/cucumber/ -it --rm \
   --user=`id -u $USER` \
-  registry.atech.com.br/cucumber-runner \
+  ${REGISTRY_SERVER}/cucumber-runner \
   --version
 ```
 
@@ -43,7 +42,7 @@ docker run -v `pwd`/test:/cucumber/ -it --rm \
 docker run -v `pwd`/test:/cucumber/ -it --rm \
   --net=host \
   --user=`id -u $USER` \
-  registry.atech.com.br/cucumber-runner
+  ${REGISTRY_SERVER}/cucumber-runner
 ```
 
 **Open chrome display**
@@ -56,7 +55,7 @@ docker run -it --rm \
   -v `pwd`/test:/cucumber \
   -v /tmp/.X11-unix:/tmp/.X11-unix \
   -e DISPLAY=$DISPLAY \
-  registry.atech.com.br/cucumber-runner
+  ${REGISTRY_SERVER}/cucumber-runner
 ```
 
 **Prevent container exit**
@@ -65,5 +64,5 @@ To prevent container exit, passing environment `LOCK` with true value
 ```sh
 docker run -v `pwd`/test:/cucumber/ -it --rm \
   -e LOCK=true \
-  registry.atech.com.br/cucumber-runner
+  ${REGISTRY_SERVER}/cucumber-runner
 ```
