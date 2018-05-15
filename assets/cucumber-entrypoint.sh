@@ -1,6 +1,7 @@
 #!/bin/bash
 OPTIONS=$*
 
+echo 'Installing gem dependencies for project.'
 bundle install --path ${BUNDLE_INSTALL_PATH:=vendor/bundle}
 
 EXIT_CODE=$?
@@ -16,6 +17,7 @@ if [ ${EXIT_CODE} != 0 ]; then
   fi
 fi
 
+echo 'Running cucmber features'
 cucumber ${OPTIONS}
 EXIT_CODE=$?
 

@@ -5,13 +5,18 @@ USER root
 WORKDIR /opt
 
 # chrome driver
-RUN apt-get update > /dev/null && apt-get install -y unzip chromedriver libxi6 libgconf-2-4
+RUN apt-get update > /dev/null && apt-get install -y unzip chromedriver libxi6 libgconf-2-4 build-essential libaio-dev
 
 # chrome driver version 2.29
-COPY assets/chromedriver/chromedriver_linux64.zip /opt/
+COPY assets/chromedriver/chromedriver_linux64_2_29.zip /opt/
 
-RUN unzip /opt/chromedriver_linux64.zip -d /opt/ && \
+RUN unzip /opt/chromedriver_linux64_2_29.zip -d /opt/ && \
     chmod +x /opt/chromedriver
+
+# oracle driver
+ADD assets/oracle/instantclient_12_2.tar.gz /opt/oracle/
+
+ENV LD_LIBRARY_PATH=/opt/oracle/instantclient_12_2
 
 # startup
 COPY assets/cucumber-entrypoint.sh /opt/cucumber-entrypoint.sh

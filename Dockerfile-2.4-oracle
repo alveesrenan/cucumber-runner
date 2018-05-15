@@ -1,9 +1,0 @@
-FROM registry.atech.com.br/cucumber-runner:2.4
-
-USER root
-
-RUN apt-get install -y build-essential libaio-dev
-
-ADD assets/oracle/instantclient_12_2.tar.gz /opt/oracle/
-
-ENV LD_LIBRARY_PATH=/opt/oracle/instantclient_12_2
